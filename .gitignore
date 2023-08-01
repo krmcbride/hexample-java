@@ -10,6 +10,7 @@ logs/
 dist/
 tmp/
 bin/
+.env
 
 # Vim
 *.sw?

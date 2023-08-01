@@ -2,3 +2,16 @@ spring:
   graphql:
     graphiql:
       enabled: true
+  kafka:
+    properties:
+      # Required connection configs for Kafka producer, consumer, and admin
+      sasl.mechanism: PLAIN
+      bootstrap.servers: "${KAFKA_BOOTSTRAP_SERVERS}"
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="${KAFKA_USERNAME}" password="${KAFKA_PASSWORD}";
+      security.protocol: SASL_SSL
+      # Best practice for higher availability in Apache Kafka clients prior to 3.0
+      session.timeout.ms: 45000
+      # Required connection configs for Confluent Cloud Schema Registry
+      basic.auth.credentials.source: USER_INFO
+      basic.auth.user.info: "{{ SR_API_KEY }}:{{ SR_API_SECRET }}"
+      schema.registry.url: "https://{{ SR_ENDPOINT }}"
